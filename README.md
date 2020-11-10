@@ -7,7 +7,7 @@ I've included he following libraries to expedite the dev process
 
 ### Material-UI
 React components for faster and easier web development. Build your own design system, or start with Material Design.
-[https://material-ui.com/] 
+https://material-ui.com/
 
 ## Available Scripts
 
