@@ -2,27 +2,31 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Cheats
+Clicking the EIG logo on the spec built application will take you to a sign in page where you can change the User Name and Claim Number and click the sign in button to reload the application with the specified User Name / Claim Number.
+
+## Known Issues / Concerns
+### Uploading Photos
+1. Clicking Upload Photos followed by the "Back" or "cancel button will result in a permanent loading screen
+2. Uploading more than the maxNumber constant in UploadingImages.jsx will result in a permanent loading screen
+
+### Signing In
+1. There is currently no validation on the UserName / Claim number fields of the spec built application
+
 ## Included Libraries
 I've included he following libraries to expedite the dev process
 
 ### Material-UI
 React components for faster and easier web development. Build your own design system, or start with Material Design.
 
-Visit the website: [https://material-ui.com/](Material-UI)
+Visit the website: https://material-ui.com/
 
-### ImageUploader
-Simple component for upload and validate (client side) images with preview built with React.js. This package use 'react-flip-move' for animate the file preview images.
+### ImageUploading
+The simple images uploader applied Render Props pattern.
 
-Visit the git: [https://github.com/jakehartnell/react-images-upload](Jake Hatnell Git)
+This approach allows you to fully control UI component and behaviours.
 
-### React Flip Move
-This module was built to tackle the common but arduous problem of animating a list of items when the list's order changes.
-
-CSS transitions only work for CSS properties. If your list is shuffled, the items have rearranged themselves, but without the use of CSS. The DOM nodes don't know that their on-screen location has changed; from their perspective, they've been removed and inserted elsewhere in the document.
-
-Flip Move uses the FLIP technique to work out what such a transition would look like, and fakes it using 60+ FPS hardware-accelerated CSS transforms.
-
-Visit the git: [https://github.com/joshwcomeau/react-flip-move](Official Git)
+Visit the git: https://github.com/vutoan266/react-images-uploading
 
 ## Available Scripts
 

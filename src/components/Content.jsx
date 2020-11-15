@@ -1,30 +1,51 @@
+import { Container, Grid } from "@material-ui/core";
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import ImageUploader from "react-images-upload";
-
-const useStyles = makeStyles((theme) => ({
-  fab: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
+import SignIn from "./SignIn";
+import UploadImages from "./UploadImages";
 
 export default function Content(props) {
-  const classes = useStyles();
-  const [pictures, setPictures] = useState([]);
-
-  const onDrop = (picture) => {
-    setPictures([...pictures, picture]);
-  };
+  const mode = props.mode;
+  const userName = props.userName;
+  const claimNumber = props.claimNumber;
+  const setMode = props.setMode;
+  const setUserName = props.setUserName;
+  const setClaimNumber = props.setClaimNumber;
 
   return (
-    <ImageUploader
-      withIcon={true}
-      buttonText="Upload Photos"
-      label= "Max image size: 5MB"
-      onChange={onDrop}
-      maxFileSize={5242880}
-    />
+    <Container>
+      {/* <Grid container> */}
+        {mode == "SignIn" ? (
+          // <Grid item>
+            <SignIn
+              setMode={setMode}
+              claimNumber={claimNumber}
+              userName={userName}
+              setClaimNumber={setClaimNumber}
+              setUserName={setUserName}
+            />
+          // </Grid>
+        ) : mode == "UploadPhotos" ||
+          mode == "UploadedPhotos" ||
+          mode == "SubmittedPhotos" ||
+          mode == "PhotoHelp" ||
+          mode == "ContactUs" ? (
+          // <Grid item>
+            <UploadImages
+              mode={mode}
+              setMode={setMode}
+              claimNumber={claimNumber}
+              userName={userName}
+            />
+          // </Grid>
+        ) : (
+          // <Grid item>
+            <p>
+              The server is not responding to requests at this time. Please try
+              again in a few minutes or contact EIG Restoration.
+            </p>
+          // </Grid>
+        )}
+      {/* </Grid> */}
+    </Container>
   );
 }
