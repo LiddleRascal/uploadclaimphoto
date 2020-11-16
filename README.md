@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and was created as an exercise to prove that I have at least basic REACT.js skills.
 
-I created two seperate UIs for this application. While similar, the UI as specified felt clunky and there were some use cases (Such as getting back to Upload Photos from the Photo Help page or removing photos from the image list) that I felt should be addressed in a different UI. The EIG Material UI is a little more streamlined familiar to mobiles user in my humble opinion. While it is not perfect, it is a decent indication of my level (Or lack thereof) of expertise.
+I created two separate UIs for this application. While similar, the UI as specified felt clunky and there were some use cases (Such as getting back to Upload Photos from the Photo Help page or removing photos from the image list) that I felt should be addressed in a different UI. The EIG Material UI is a little more streamlined familiar to mobiles user in my humble opinion. While it is not perfect, it is a decent indication of my level (Or lack thereof) of expertise.
 
 > This application is intended for use on a mobile device, but can be viewed and / or used on a large screen although the aligments may be a little off.
 
