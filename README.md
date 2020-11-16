@@ -43,6 +43,7 @@ The exercise was mostly successful. Some issue could not be resolved and running
 6. Select a few photos
    > See known issues for limitations / unresolved issues
 7. Click Submit button
+  > Note: Clicking this link **will** clear images array
 8. Rinse > Repeat
 * Click Help Icon (when visible)
   - Select Photo Help option
