@@ -4,38 +4,30 @@ import {
   CircularProgress,
   Grid,
   makeStyles,
+  GridList,
 } from "@material-ui/core";
 import ImageUploading from "react-images-uploading";
-import ImageListItem from "./ImageListItem";
-import Instructions from "./Instructions";
-import UploadButtons from "./UploadButtons";
+import ImageListItemEigMatUI from "./ImageListItemEigMatUI";
+import InstructionsEigMatUI from "./InstructionsEigMatUI";
+import UploadButtonsEigMatUI from "./UploadButtonsEigMatUI";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flex: 1,
+    flex: 0,
   },
   gridlist: {
-    [theme.breakpoints.down("XL")]: {
-      maxHeight: 700,
-    },
-    [theme.breakpoints.down("lg")]: {
-      maxHeight: 700,
-    },
-    [theme.breakpoints.down("md")]: {
-      maxHeight: 500,
-    },
-    [theme.breakpoints.down("sm")]: {
-      maxHeight: 400,
-    },
-    [theme.breakpoints.down("xs")]: {
-      maxHeight: 200,
-    },
-    flexGrow: 0,
+    flexGrow: 1,
+    maxHeight: 400,
     overflowY: "auto",
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#ffffff",
+  },
+  titleBar: {
+    background:
+      "linear-gradient(to bottom, rgba(122, 181, 172,0.0) 0%, " +
+      "rgba(122, 181, 172,0.3) 70%, rgba(122, 181, 172,0.5) 100%)",
   },
 }));
 
@@ -67,7 +59,7 @@ export default function UploadImages(props) {
   return (
     <Grid container spacing={2} direction="column" alignItems="stretch">
       <Grid item>
-        <Instructions
+        <InstructionsEigMatUI
           instructionsMode={mode}
           userName={userName}
           claimNumber={claimNumber}
@@ -86,7 +78,7 @@ export default function UploadImages(props) {
           resolutionHeight="100"
           dataURLKey="data_url"
         >
-          {({ imageList, onImageUpload, onImageRemoveAll }) => (
+          {({ imageList, onImageUpload, onImageRemoveAll, onImageRemove }) => (
             <Grid
               container
               direction="column"
@@ -94,7 +86,7 @@ export default function UploadImages(props) {
               className={classes.root}
             >
               <Grid item>
-                <UploadButtons
+                <UploadButtonsEigMatUI
                   instructionsMode={mode}
                   setMode={setMode}
                   setLoading={setLoading}
@@ -104,19 +96,21 @@ export default function UploadImages(props) {
                 />
               </Grid>
               {mode === "PhotoHelp" || mode === "ContactUs" ? null : (
-                <Grid container item xs={9} className={classes.gridlist}>
-                  {imageList
-                    .map((image, index) => (
-                      <ImageListItem
-                        key={index}
-                        imageSource={image.data_url}
-                        imageTitle={image.file.name}
-                        imageIndex={index}
-                        loading={loading}
-                        imageLoaded={imageLoaded}
-                      />
-                    ))
-                    .reverse()}
+                <Grid item className={classes.gridlist}>
+                  <GridList cellHeight={80} cols={3} spacing={2}>
+                    {imageList
+                      .map((image, index) => (
+                        <ImageListItemEigMatUI
+                          key={index}
+                          imageSource={image.data_url}
+                          imageTitle={image.file.name}
+                          imageIndex={index}
+                          imageLoaded={imageLoaded}
+                          onImageRemove={onImageRemove}
+                        />
+                      ))
+                      .reverse()}
+                  </GridList>
                 </Grid>
               )}
             </Grid>

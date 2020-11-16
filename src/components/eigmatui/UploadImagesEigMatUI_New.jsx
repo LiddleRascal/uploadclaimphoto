@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: "100%",
     height: 450,
   },
   paper: {
@@ -50,26 +49,25 @@ export default function UploadImages(props) {
   const timeOfDay = getTime();
   const [pictureCount, setPictureCount] = useState(0);
   const [images, setImages] = useState([]);
-  const maxNumber = 69;
+  const maxNumber = 20;
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
-    setPictureCount(imageList.length);
   };
   const classes = useStyles();
 
   return (
     <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h6">
+      <Grid container spacing={2} direction="column">
+        <Grid item>
+          <Typography variant="subtitle1">
             Good {timeOfDay}, {userName}.
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item>
           In order to most accurately process your recent claim ({claimNumber}),
           we ask that you submit photos of the damage that you reported.
         </Grid>
-        <Grid item xs={12} className={classes.root}>
+        <Grid item className={classes.root}>
           <ImageUploading
             multiple
             value={images}
@@ -120,36 +118,34 @@ export default function UploadImages(props) {
                   </Grid>
                 </Grid>
                 <Grid item>
-                  {/* <Paper variant="outlined" className={classes.paper}> */}
-                    <GridList
-                      cellHeight={160}
-                      cols={1}
-                      spacing={2}
-                      className={classes.gridList}
-                    >
-                      {imageList
-                        .map((image, index) => (
-                          <GridListTile key={index} item xs={3}>
-                            <img src={image.data_url} alt={image.title} />
-                            <GridListTileBar
-                              title={image.title}
-                              className={classes.titleBar}
-                              titlePosition="bottom"
-                              actionIcon={
-                                <IconButton
-                                  color="primary"
-                                  onClick={() => onImageRemove(index)}
-                                >
-                                  <DeleteIcon />
-                                </IconButton>
-                              }
-                              actionPosition="right"
-                            />
-                          </GridListTile>
-                        ))
-                        .reverse()}
-                    </GridList>
-                  {/* </Paper> */}
+                  <GridList
+                    cellHeight={80}
+                    cols={3}
+                    spacing={1}
+                    className={classes.gridList}
+                  >
+                    {imageList
+                      .map((image, index) => (
+                        <GridListTile key={index} item xs={3}>
+                          <img src={image.data_url} alt={image.title} />
+                          <GridListTileBar
+                            title={image.title}
+                            className={classes.titleBar}
+                            titlePosition="bottom"
+                            actionIcon={
+                              <IconButton
+                                color="primary"
+                                onClick={() => onImageRemove(index)}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            }
+                            actionPosition="right"
+                          />
+                        </GridListTile>
+                      ))
+                      .reverse()}
+                  </GridList>
                 </Grid>
               </Grid>
             )}

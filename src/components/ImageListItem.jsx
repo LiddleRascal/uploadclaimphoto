@@ -1,14 +1,17 @@
 import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-import { Autorenew, Height } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  hideoverflow:{
+  hideoverflow: {
     overflow: "hidden",
   },
   myimage: {
     height: 100,
     resizeMode: "contain",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#ffffff",
   },
 }));
 

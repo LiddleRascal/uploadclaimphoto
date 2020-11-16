@@ -1,11 +1,11 @@
 import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-import { theme } from "../styles/theme";
 import Logo from '../styles/img/logo.svg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flex: 1,
+    flex: 0,
+    width: "100%", 
     margin: theme.spacing(2),
   },
   grow: {

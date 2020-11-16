@@ -7,13 +7,13 @@ export default function Footer(props) {
 
   return (
     <Grid container direction="column" alignItems="center" spacing={2}>
-      {mode != "ContactUs" && mode != "PhotoHelp"  ? (
+      {mode !== "ContactUs" && mode !== "PhotoHelp"  ? (
       <Grid item >
         <a href="#" onClick={() => setMode("PhotoHelp")}>
           What photos should I take?
         </a>
       </Grid>) : null}
-      {mode != "ContactUs" ? (
+      {mode !== "ContactUs" ? (
         <Grid item>
           <a href="#" onClick={() => setMode("ContactUs")}>
             Contact EIG

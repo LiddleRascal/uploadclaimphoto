@@ -8,7 +8,9 @@ export const eigMatTheme = createMuiTheme({
     secondary: {
       main: "#7AB5AC",
     },
+    tertiary: {
+      main: "#dddddd",
+    },
   },
 });
-
 export default eigMatTheme;

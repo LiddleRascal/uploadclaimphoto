@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
-import SignIn from "./SignIn";
-import UploadImages from "./UploadImages";
+import SignIn from "../SignIn";
+import UploadImagesEigMatUI from "./UploadImagesEigMatUI";
 
 export default function Content(props) {
   const mode = props.mode;
@@ -31,7 +31,7 @@ export default function Content(props) {
           mode === "SubmittedPhotos" ||
           mode === "PhotoHelp" ||
           mode === "ContactUs" ? (
-          <UploadImages
+          <UploadImagesEigMatUI
             mode={mode}
             setMode={setMode}
             claimNumber={claimNumber}

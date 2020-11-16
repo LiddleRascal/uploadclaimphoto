@@ -1,14 +1,18 @@
 import React from "react";
-import { Grid, Button, makeStyles } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    width: 180,
+
     height: 50,
   },
 }));
 
-export default function UploadButtons(props) {
+export default function UploadButtonsEigMatUI(props) {
   const classes = useStyles();
 
   const mode = props.instructionsMode;
@@ -34,9 +38,9 @@ export default function UploadButtons(props) {
   };
 
   return (
-    <Grid container>
+    <Grid container direction="column" justify="center" alignItems="stretch">
       {mode === "UploadPhotos" || mode === "UploadedPhotos" ? (
-        <Grid container direction="column" spacing={2} alignItems="center" item>
+        <Grid container direction="row" justify="center" alignItems="center" item spacing={2}>
           <Grid item>
             <Button
               className={classes.button}
@@ -45,7 +49,7 @@ export default function UploadButtons(props) {
               color="primary"
               onClick={() => uploadImages(onImageUpload)}
             >
-              Upload Photos
+              Select Photos
             </Button>
           </Grid>
           <Grid item>
@@ -61,7 +65,7 @@ export default function UploadButtons(props) {
             </Button>
           </Grid>
         </Grid>
-      ) : mode === "SubmittedPhotos" || mode === "ContactUs" ? (
+      ) : mode === "SubmittedPhotos" ? (
         <Grid container direction="column" spacing={2} alignItems="center" item>
           <Grid item>
             <Button

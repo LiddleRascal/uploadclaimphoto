@@ -1,90 +1,91 @@
 import "../styles/css/App.css";
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { theme } from "../styles/theme";
-import Content from "../components/Content";
-import Header from "../components/Header";
+import {
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import { theme, eigMatTheme } from "../styles/theme";
+import SpecUI from "../components/SpecUI";
+import EigMatUI from "../components/eigmatui/EigMatUI";
 import { Grid } from "@material-ui/core";
-import Footer from "../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flex: 1,
-    width: "100%",
-  },
-  header: {
-    flex: 0,
-    top: 0,
-    position: "sticky",
-    backgroundColor: "#ffffff",
-  },
-  content: {
-    flex: 1,
-    marginLeft: theme.spacing(2),
-  },
-  footer: {
-    flex: 0,
-    bottom: 0,
-    position: "sticky",
-    backgroundColor: "#ffffff",
-    marginLeft: theme.spacing(2),
+    width: "100vw",
+    height: "100vh",
   },
 }));
 
 export default function App() {
-  const classes = useStyles();
-
-  const [mode, setMode] = useState("UploadPhotos");
   // mode:
   // This is a global state that is intended to control the visibility, functionality, and text
   // of all controls in the application
   // Modes:
-  // "SignIn" : Sign In functionality - Going to short curcuit this as it's not in the reqs
-  // "UploadPhotos" : This is the base upload photos state. No photos have been uploaded at this point.
-  // "UploadedPhotos" : This is the state in which a user has uploaded photos. This state is needed to toggle the Submit button
+  // "SignIn" : Displays Sign In functionality
+  // "UploadPhotos" : This is the base upload photos state. No photos have been uploaded at this point. The Submit button is disabled in this state
+  // "UploadedPhotos" : This is the state in which a user has uploaded photos. This state is needed to enable the Submit button
   // and the User name field as per requirements
   // "SubmittedPhotos" : This is the state in which a user has submitted photos and cleared out the image list. This state is needed to toggle the onclick action of
   // the Upload Photos button
-  // "PhotoHelp" : This is the state in which a user has submitted photos and cleared out the image list. This state is needed to toggle the onclick action of
-  // the Upload Photos button
+  // "PhotoHelp" : This state toggles the 'help' instructions. Both buttons are hidden in this state This state does not clear the images variable
+  // "ContactUs" : This state toggles the 'contact' instructions, hides the submit button, and changes the upload photos button to a button that toggles mode to "UploadPhotos"
+  // This state does not clear the images variable
+  const [mode, setMode] = useState("SignIn");
+
+  // userName: The UserName variable
   const [userName, setUserName] = useState("Most V. Customer");
 
-  // userName:
-  // If we were signing in this would contain the username variable
-
+  // claimNumber: The claimNumber variable
   const [claimNumber, setClaimNumber] = useState("A1B2C3D4E5F6");
 
+  // specUiTheme: Toggles the UI theme.
+  // True = UI as Spec'd in requirements documentation
+  // False = UI as interpreted by yours truly
+  const [specUiTheme, setSpecUiTheme] = useState(true);
+
+  const classes = useStyles();
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={specUiTheme ? createMuiTheme(theme) : createMuiTheme(eigMatTheme)}
+    >
       <Grid
         id="app"
         container
         direction="column"
+        justify="center"
+        className={classes.root}
         alignItems="stretch"
         spacing={2}
-        className={classes.root}
       >
-        <Grid item className={classes.header}>
-          <Header id="header" setMode={setMode} />
+          {specUiTheme ? (
+            <SpecUI
+              mode={mode}
+              userName={userName}
+              claimNumber={claimNumber}
+              specUiTheme={specUiTheme}
+              setMode={setMode}
+              setUserName={setUserName}
+              setClaimNumber={setClaimNumber}
+              setSpecUiTheme={setSpecUiTheme}
+              className={classes.root}
+            />
+          ) : (
+            <EigMatUI
+              mode={mode}
+              userName={userName}
+              claimNumber={claimNumber}
+              specUiTheme={specUiTheme}
+              setMode={setMode}
+              setUserName={setUserName}
+              setClaimNumber={setClaimNumber}
+              setSpecUiTheme={setSpecUiTheme}
+              className={classes.root}
+            />
+          )}
         </Grid>
-        <Grid item className={classes.content}>
-          <Content
-            id="content"
-            mode={mode}
-            userName={userName}
-            claimNumber={claimNumber}
-            setMode={setMode}
-            setUserName={setUserName}
-            setClaimNumber={setClaimNumber}
-          />
-        </Grid>
-        {mode === "SignIn" ? null : (
-          <Grid item className={classes.footer}>
-            <Footer id="footer" mode={mode} setMode={setMode} />
-          </Grid>
-        )}
-      </Grid>
     </ThemeProvider>
   );
 }

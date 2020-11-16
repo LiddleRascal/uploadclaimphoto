@@ -8,29 +8,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Instructions(props) {
+const getTime = () => {
+  let hour = new Date().getHours();
+  var timeGreeting =
+    hour < 11 ? "Morning" : hour < 16 ? "Afternoon" : "Evening";
+  return timeGreeting;
+};
+
+export default function InstructionsEigMatUI(props) {
   const classes = useStyles();
   const instructionsMode = props.instructionsMode;
   const userName = props.userName;
   const claimNumber = props.claimNumber;
-
+  const timeOfDay = getTime();
   return (
     <Grid container direction="column" item>
-      {instructionsMode === "UploadPhotos" ? (
+      {instructionsMode === "UploadPhotos" ||
+      instructionsMode === "UploadedPhotos" ? (
         <Grid container item spacing={2} direction="column">
-          <Grid item>Hi, {userName}</Grid>
           <Grid item>
-            In order to most efficiently process your (#
-            {claimNumber}), we ask that you submit photos of the damage that you
-            reported. The photos should clearly show the damage itself, as well
-            as the surrounding areas.
+            Good {timeOfDay}, {userName}.
           </Grid>
-        </Grid>
-      ) : instructionsMode === "UploadedPhotos" ? (
-        <Grid container item spacing={2} direction="column">
           <Grid item>
-            In order to most accurately process your recent claim (#
-            {claimNumber}
+            In order to most accurately process your recent claim ({claimNumber}
             ), we ask that you submit photos of the damage that you reported.
           </Grid>
         </Grid>
@@ -50,7 +50,7 @@ export default function Instructions(props) {
           </Grid>
         </Grid>
       ) : instructionsMode === "ContactUs" ? (
-        <Grid container item spacing={2} direction="column">
+        <Grid container item spacing={2} direction="column" justify="center">
           <Grid item>
             Contact our home office today to find out how we can help.
           </Grid>
